@@ -1,0 +1,51 @@
+<app-menu-link></app-menu-link>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <h2>Employee Leave Requests</h2>
+    <hr/><br/>
+    <div class="panel panel-header">
+        <button class="btn btn-success" (click)="exportReport()">Export Report</button>
+    </div>
+    <hr/>
+    <table class="table table-responsive">
+      <thead>
+        <th>Start Date</th>
+        <th>Last Date</th>
+        <th>Reason</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+          <tr *ngIf="!hasLeaves"><td colspan="5"><label>no leave request created yet.</label></td></tr>
+          <tr *ngFor="let leave of leaves">
+              <td><label>{{leave.reason}}</label></td>
+              <td><label>{{leave.startDate}}</label></td>
+              <td><label>{{leave.endDate}}</label></td>
+              <td colspan="2"><button class="btn btn-warning" (click)="changeRequest(leave.id)">Change</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <h2>Create Leave Request</h2>
+    <hr/><br/>
+    <div *ngIf="alertclass != ''" class="alert {{alertclass}}">{{alertmessage}}</div>
+    <form [formGroup] = "formdata" (ngSubmit) = "addLeaveRequest(formdata.value)">
+      <label>Leave Start Date: </label><input type="date" class="form-control fortextbox" id="startDate" name="startDate" placeholder="" formControlName="startDate" >
+      <br/>
+      <label>Last Day Of Leave: </label><input type="date" class="form-control fortextbox" id="endDate" name="endDate" placeholder="" formControlName="endDate" >
+      <br/>
+      <label>Reason for Leave: </label><select class="form-control fortextbox" name="reason" placeholder="" formControlName="reason">
+          <option value="">-- select --</option>
+          <option value="Sick Leave">Sick Leave</option>
+          <option value="Annual Leave">Annual Leave</option>
+          <option value="Other">Other</option>
+      </select>
+      <br/>
+      <input type="submit" class="btn btn-success forsubmit" [disabled] = "!formdata.valid" value="Submit"> 
+      <input *ngIf="update" type="button" class="btn btn-danger forsubmit" (click)="cancelUpdate()" value="Cancel">
+    </form>
+  </div>
+  </div>
+</div>

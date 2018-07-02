@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <h2>Employee Registration</h2>
+    <hr/><br/>
+    <div *ngIf="alertclass != ''" class="alert {{alertclass}}">{{alertmessage}}</div>
+    <form [formGroup] = "formdata" (ngSubmit) = "addEmployee(formdata.value)">
+      <label>Name: </label><input type="text" class="form-control fortextbox" name="name" placeholder="Name" formControlName="name">
+      <br/>
+      <label>Surname: </label><input type="text" class="form-control fortextbox" name="surname" placeholder="Surname" formControlName="surname">
+      <br/>
+      <label>Date of Birth: </label><input type="date" class="form-control fortextbox" id="dateOfBirth" name="dateOfBirth" placeholder="Date Of Birth" formControlName="dateOfBirth" >
+      <br/>
+      <label>Date of Employment: </label><input type="date" class="form-control fortextbox" id="dateOfEmployment" name="dateOfEmployment" placeholder="Date Of Employee" formControlName="dateOfEmployment" >
+      <br/>
+      <label>ID Type: </label><select class="form-control fortextbox" name="idType" placeholder="ID Type" formControlName="idType">
+          <option value="">-- select --</option>
+          <option value="Passport">SA Passport</option>
+          <option value="SA Identification">SA Identification</option>
+          <option value="Certificate">Certificate</option>
+      </select>
+      <br/>
+      <label>ID Number: </label><input type="text" class="form-control fortextbox" name="idNumber" placeholder="ID Number" formControlName="idNumber">
+      <br/>
+      <input type="submit" class="btn btn-success forsubmit" [disabled] = "!formdata.valid" value="Register">
+    </form>
+  </div>
+  <div class="col-md-6"></div>
+  </div>
+</div>
